@@ -1,0 +1,13 @@
+<button id="button">点我</button>
+<script>
+    button.addEventListener('click',()=>{ // 宏任务
+        console.log('listener1');
+        Promise.resolve().then(()=>console.log('micro task1'))
+    })
+    button.addEventListener('click',()=>{
+        console.log('listener2');
+        Promise.resolve().then(()=>console.log('micro task2'))
+    })
+    // 宏任务是一个个取出来
+    button.click(); // click1() click2();
+</script>

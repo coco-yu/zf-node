@@ -1,0 +1,42 @@
+<script>
+    // console.log(1);
+    async function async () {
+        console.log(2);
+        await console.log(3) // Promise.resolve().then(()=>{ console.log(4)})
+        console.log(4)
+    }
+    // setTimeout(() => {
+    //     console.log(5);
+    // }, 0);
+    const promise = new Promise((resolve, reject) => {
+        // console.log(6);
+        // resolve(7)
+    })
+    promise.then(res => {
+        console.log(res)
+    })
+    // async(); 直接执行
+    // console.log(8)
+
+    // 宏任务 [setTimeout5]
+    // 微任务 [then7,then4]
+    // 1 6 2 3 8 7 4 5
+    // 面试的时候会问 (考察你是否掌握浏览器的事件环)
+
+
+    // 宏任务：setTimeout script  ui渲染  setImmediate （ie下才执行） messageChannel requestAnimationFrame node i/o ajax
+
+    // 微任务 promise.then  mutationObserver  queueMircoTask(promise.then) (process.nextTick)
+
+
+    // https://javascript.info/event-loop
+
+   let channel =  new MessageChannel();
+   channel.port1.postMessage('ok')
+   channel.port2.onmessage=function(e){ // 宏任务
+       console.log(e.data)
+   }
+   Promise.resolve().then(data=>{
+       console.log(data);
+   })
+</script>
